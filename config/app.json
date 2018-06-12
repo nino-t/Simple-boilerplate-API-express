@@ -1,0 +1,5 @@
+{
+	"NAME": "Simple bolierplate Express",
+	"ENV": "development",
+	"URL": "http://localhost"
+}
