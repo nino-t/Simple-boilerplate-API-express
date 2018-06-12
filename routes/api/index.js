@@ -1,9 +1,9 @@
-import { TodoController } from '../../app/controllers'
+import { 
+	TodoController
+} from '../../app/controllers'
 
 const API = (router) => {
-	router.get('/todos', (req, res) => {
-		res.send(TodoController.getList())
-	})
+	router.get('/todos', TodoController.getList)
 
 	return router
 } 

@@ -8,11 +8,14 @@ module.exports = {
 	target: "node",
 	mode: 'development',
 	externals: [nodeExternals()],
-	entry: "./server.js",
+	entry: ["babel-polyfill", "./server.js"],
 	output: {
 		filename: "server.bundle.js",
 		path: path.join(__dirname)
 	},
+    node: {
+        __dirname: false
+    },	
 	module: {
 		rules: [
 			{

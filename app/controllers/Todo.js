@@ -1,10 +1,14 @@
-var Todo = require('../../models').Todo
+import { todoService } from '../service'
 
 export const TodoController = {
 	getList
 }
 
-console.log(Todo)
-function getList() {
-	return 'API Todo'
-}
+async function getList(req,res) {
+	try{
+		let result = await todoService.getList()
+		res.status(200).send(result)
+	}catch(err){
+		res.status(403).send(err)
+	}
+} 
