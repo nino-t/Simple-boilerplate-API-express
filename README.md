@@ -27,8 +27,8 @@
 | npm run db:migrate:status   | sequelize db:migrate:status      | run migration status                                    |
 | npm run db:migrate:undo     | sequelize db:migrate:undo        | run migration rollback from lasted                      |
 | npm run db:migrate:undo:all | sequelize db:migrate:undo:all    | run migration rollback to all migration file            |
-| npm run db:seed             | sequelize db:seed:all            | run seeder and seeded to datababase                     |
-| npm run db:seed:undo        | sequelize db:seed:undo           | run seeder rollback and rollback seeded from datababase |
+| npm run db:seed             | sequelize db:seed:all            | run seeder and seeded to database                       |
+| npm run db:seed:undo        | sequelize db:seed:undo           | run seeder rollback and rollback seeded from database   |
 
 <br>
 
