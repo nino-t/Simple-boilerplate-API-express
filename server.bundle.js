@@ -222,7 +222,7 @@ eval("module.exports = {\"PORT\":3000};\n\n//# sourceURL=webpack:///./config/ser
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.createToken = exports.verifyToken = undefined;\n\nvar _config = __webpack_require__(/*! ../config */ \"./config/index.js\");\n\nvar _jsonwebtoken = __webpack_require__(/*! jsonwebtoken */ \"jsonwebtoken\");\n\nvar _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar verifyToken = exports.verifyToken = function verifyToken(token) {\n\treturn new Promise(function (resolve, reject) {\n\t\t_jsonwebtoken2.default.verify(token, _config.AUTH_KEY, function (err, decodedToken) {\n\t\t\tif (err || !decodedToken) {\n\t\t\t\treturn reject(err);\n\t\t\t}\n\n\t\t\tresolve(decodedToken);\n\t\t});\n\t});\n};\n\nvar createToken = exports.createToken = function createToken(user) {\n\tvar token = _jsonwebtoken2.default.sign({\n\t\tuserId: user.id\n\t}, _config.AUTH_KEY, {\n\t\texpiresIn: 3600,\n\t\talgorithm: 'HS256'\n\t});\n\n\treturn token;\n};\n\n//# sourceURL=webpack:///./lib/auth.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.createToken = exports.verifyToken = undefined;\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _config = __webpack_require__(/*! ../config */ \"./config/index.js\");\n\nvar _jsonwebtoken = __webpack_require__(/*! jsonwebtoken */ \"jsonwebtoken\");\n\nvar _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);\n\nvar _lodash = __webpack_require__(/*! lodash */ \"lodash\");\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar verifyToken = exports.verifyToken = function verifyToken(token) {\n\treturn new Promise(function (resolve, reject) {\n\t\t_jsonwebtoken2.default.verify(token, _config.AUTH_KEY, function (err, decodedToken) {\n\t\t\tif (err || !decodedToken) {\n\t\t\t\treturn reject(err);\n\t\t\t}\n\n\t\t\tresolve(decodedToken);\n\t\t});\n\t});\n};\n\nvar createToken = exports.createToken = function createToken(user) {\n\tif ((typeof user === 'undefined' ? 'undefined' : _typeof(user)) !== 'object') {\n\t\tuser = {};\n\t}\n\n\tuser.sessionData = _lodash2.default.reduce(user.sessionData || {}, function (memo, val, key) {\n\t\tif (typeof val !== \"function\" && key !== \"password\") {\n\t\t\tmemo[key] = val;\n\t\t}\n\t\treturn memo;\n\t}, {});\n\n\tvar token = _jsonwebtoken2.default.sign({\n\t\tuser: user.sessionData\n\t}, _config.AUTH_KEY, {\n\t\texpiresIn: 3600,\n\t\talgorithm: 'HS256'\n\t});\n\n\treturn token;\n};\n\n//# sourceURL=webpack:///./lib/auth.js?");
 
 /***/ }),
 
@@ -385,6 +385,17 @@ eval("module.exports = require(\"fs\");\n\n//# sourceURL=webpack:///external_%22
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"jsonwebtoken\");\n\n//# sourceURL=webpack:///external_%22jsonwebtoken%22?");
+
+/***/ }),
+
+/***/ "lodash":
+/*!*************************!*\
+  !*** external "lodash" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"lodash\");\n\n//# sourceURL=webpack:///external_%22lodash%22?");
 
 /***/ }),
 

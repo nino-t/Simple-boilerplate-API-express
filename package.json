@@ -7,7 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack && node server.bundle.js",
     "db:migrate": "sequelize db:migrate",
-    "db:seed": "sequelize db:seed:all"
+    "db:migrate:status": "sequelize db:migrate:status",
+    "db:migrate:undo": "sequelize db:migrate:undo",
+    "db:migrate:undo:all": "sequelize db:migrate:undo:all",
+    "db:seed": "sequelize db:seed:all",
+    "db:seed:undo": "sequelize db:seed:undo",
+    "db:seed:undo:all": "sequelize db:seed:undo:all"
   },
   "keywords": [],
   "author": "",
