@@ -1,6 +1,40 @@
 ## Simple boilerplate API express
 <br>
 
+##### How to run boilerplate:
+
+1. npm install
+2. npm i -g sequelize-cli (if you have not installed sequelize-cli)
+3. create your database
+4. config your database env in file "/config/database.json"
+5. run command "npm run db:migrate"
+6. run command "npm run db:seed"
+7. and you can run "npm run start" to bundle backend & run server
+8. you can access at this address http://localhost:3000
+9. i'm recommended to use postman tool to check how API work to handle JWT.
+
+##### Address available:
+
+- GET http://localhost:3000/api/todos (queries = token) 
+- POST http://localhost:3000/auth/login (body = email, password, token)
+
+##### npm command:
+
+```
+| Command        |     Real Command       | function  |
+| -------------- |:--------------------------:| ---------:|
+| npm run start  | webpack && node server.bundle.js | run server with bundle backend server |
+| npm run db:migrate | sequelize db:migrate | run migration file |
+| npm run db:migrate:status | sequelize db:migrate:status | run migration status |
+| npm run db:migrate:undo | sequelize db:migrate:undo | run migration rollback from lasted |
+| npm run db:migrate:undo:all | sequelize db:migrate:undo:all | run migration rollback to all migration file |
+| npm run db:seed | sequelize db:seed:all | run seeder and seeded to datababase |
+| npm run db:seed:undo | sequelize db:seed:undo | run seeder rollback and rollback seeded from datababase |
+| npm run db:seed:undo:all | sequelize db:seed:undo:al | run seeder rollback and rollback seeded from datababase in all seeder|z
+```
+
+<br>
+
 ## MIT Licensed
 &copy; Trisno Nino
 <br>
