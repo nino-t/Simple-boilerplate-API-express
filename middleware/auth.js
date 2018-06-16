@@ -5,7 +5,7 @@ export const verifyTokenMiddleware = (req, res, next) => {
 
 	verifyToken(token)
 	.then((decodedToken) => {
-		req.user = decodedToken.data
+		req.user = decodedToken
 		next()
 	})
 	.catch((err) => {
