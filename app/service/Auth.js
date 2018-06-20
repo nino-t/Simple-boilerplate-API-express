@@ -2,7 +2,8 @@ var User = require('../../models').users
 import { createToken } from '../../lib'
 
 export const authService = {
-	login
+	login,
+	register
 }
 
 function login(email, password){
@@ -24,6 +25,20 @@ function login(email, password){
 	    		throw "Cannot generate token"
 
 	        resolve(token)
+		})
+		.catch(err => reject(err))
+	})
+}
+
+function register(data){
+	return new Promise((resolve,reject) => {
+		User.create({
+			name: data.name,
+			email: data.email,
+			password: data.password
+		})
+		.then(result => {
+			resolve(result)
 		})
 		.catch(err => reject(err))
 	})
