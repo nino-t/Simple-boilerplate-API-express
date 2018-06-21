@@ -8,7 +8,7 @@ export const authService = {
 
 function login(email, password){
 	return new Promise((resolve,reject) => {
-		User.findAll({
+		User.findOne({
 			where: {
 				email: email,
 				password: password
@@ -16,7 +16,6 @@ function login(email, password){
 			raw: true
 		})
 		.then(user => {
-			user = user[0]
 	        if (!user)
 	            throw 'Email and password invalid';
 
@@ -31,14 +30,48 @@ function login(email, password){
 }
 
 function register(data){
+	return new Promise(async(resolve,reject) => {
+		try {
+			if (!data.name)
+				throw 'Name field is required'
+
+			if (!data.email)
+				throw 'Email field is required'
+
+			if (!data.password)
+				throw 'Password field is required'
+
+			let userEmail = await findUserByEmail(data.email)
+			if (userEmail)
+				throw 'Email is exist'
+
+			let user = User.create({ 
+				name: data.name,
+				email: data.email,
+				password: data.password
+			})
+
+	        if (!user)
+	            throw 'Register is failed'
+
+	    	let token = createToken(user)
+	    	return resolve(token)
+		} catch(e) {
+			return reject(e)
+		}
+	})
+}
+
+function findUserByEmail(email){
 	return new Promise((resolve,reject) => {
-		User.create({
-			name: data.name,
-			email: data.email,
-			password: data.password
+		User.findOne({
+			where: {
+				email: email
+			},
+			raw: true
 		})
-		.then(result => {
-			resolve(result)
+		.then(user => {
+	        resolve(user)
 		})
 		.catch(err => reject(err))
 	})
