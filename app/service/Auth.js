@@ -1,5 +1,6 @@
 var User = require('../../models').users
 import { createToken } from '../../lib'
+import encrypt from 'encrypt-password'
 
 export const authService = {
 	login,
@@ -11,7 +12,7 @@ function login(email, password){
 		User.findOne({
 			where: {
 				email: email,
-				password: password
+				password: encryptPassword(password)
 			},
 			raw: true
 		})
@@ -48,7 +49,7 @@ function register(data){
 			let user = User.create({ 
 				name: data.name,
 				email: data.email,
-				password: data.password
+				password: encryptPassword(data.password)
 			})
 
 	        if (!user)
@@ -75,4 +76,16 @@ function findUserByEmail(email){
 		})
 		.catch(err => reject(err))
 	})
+}
+
+function encryptPassword(password) {
+	const encryptedPassword = encrypt(password, {
+		secret: 'secret',
+		min: 8,
+		max: 24,
+		pattern: /^\w{8,24}$/,
+		signature: 'signature',
+	})
+
+	return encryptedPassword
 }
