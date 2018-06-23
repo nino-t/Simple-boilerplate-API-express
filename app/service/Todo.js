@@ -8,9 +8,9 @@ export const todoService = {
 	deleteData
 }
 
-function getList(){
+function getList(condition){
 	return new Promise((resolve,reject) => {
-		Todo.findAll({})
+		Todo.findAndCountAll({limit: condition.limit, offset: condition.skip})
 		.then(result => {
 			resolve(result)
 		})

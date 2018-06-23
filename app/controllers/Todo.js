@@ -1,4 +1,5 @@
 import { todoService } from '../service'
+import Pagination from '../../lib/pagination'
 
 export const TodoController = {
 	getList,
@@ -10,8 +11,10 @@ export const TodoController = {
 
 async function getList(req,res) {
 	try{
-		let result = await todoService.getList()
-		res.status(200).send(result)
+		let xpagination = new Pagination(req.query.limit, req.skip)				
+		let result = await todoService.getList(xpagination.getCondition())
+
+		res.status(200).send(xpagination.render(req, result))
 	}catch(err){
 		res.status(403).send(err)
 	}
