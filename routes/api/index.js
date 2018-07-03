@@ -1,5 +1,6 @@
 import { 
-	TodoController
+	TodoController,
+	AuthController
 } from '../../app/controllers'
 
 const API = (router) => {
@@ -8,6 +9,8 @@ const API = (router) => {
 	router.get('/todos/:todoId/edit', TodoController.findById)
 	router.put('/todos/:todoId/edit', TodoController.updateData)
 	router.delete('/todos/:todoId', TodoController.deleteData)
+
+	router.get('/verify-token', AuthController.verifyAuth)
 
 	return router
 } 

@@ -1,8 +1,10 @@
 import { authService } from '../service'
+import { verifyToken } from '../../lib/auth'
 
 export const AuthController = {
 	login,
-	register
+	register,
+	verifyAuth
 }
 
 async function login(req,res) {
@@ -23,3 +25,12 @@ async function register(req,res) {
 		res.status(403).send(err)
 	}
 } 
+
+async function verifyAuth(req,res) {
+	try{
+		let result = await verifyToken(req.query.token) 
+		res.status(200).send(result)
+	}catch(err){
+		res.status(403).send(err)
+	}	
+}
