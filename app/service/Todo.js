@@ -51,11 +51,13 @@ function updateData(condition, data){
 }
 
 function deleteData(condition){
-	return new Promise((resolve,reject) => {		
-		Todo.destroy({
-			where: condition
-		})
+	return new Promise((resolve,reject) => {
+		Todo.findById(condition.id)
 		.then(result => {
+			Todo.destroy({
+				where: condition
+			})
+
 			resolve(result)
 		})
 		.catch(err => reject(err))
